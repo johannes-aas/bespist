@@ -1,0 +1,589 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    position: relative;
+    min-height: 100vh;
+}
+
+body {
+    font-family: sans-serif;
+    margin-bottom: 100px;
+    background-color: #f2f2f2;
+}
+
+#mainWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#backgroundHeader {
+    height: 200px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.mainHeader {
+    width: 100%;
+    position: fixed;
+    transition: 0.5s;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+}
+
+.mainHeader nav {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.mainHeader nav ul {
+    display: flex;
+    flex-wrap: nowrap;
+    list-style: none;
+    justify-content: space-around;
+}
+
+.mainHeader li {
+    width: 100%;
+    transition: 200ms;
+    border-bottom: 5px solid rgba(0,0,0,0);
+}
+
+.mainHeader nav a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.5s;
+    font-size: 20px;
+    line-height: 50px;
+    width: 100%;
+    padding: 75px 0 70px 0;
+    color: white;
+}
+
+.navHover:hover {
+    transform: scale(1.3);
+}
+
+#aktiv {
+    font-size: 25px;
+    border-color: white;
+}
+
+
+/* bruker navigasjon */
+
+#brukerNav {
+    top: 0;
+    right: 0;
+    width: 200px;
+    position: fixed;
+    background-color: white;
+    z-index: 100;
+    text-align: center;
+    z-index: 100;
+}
+
+#brukerNav ul {
+    list-style-type: none;
+    display: none;
+}
+
+#brukerNav a {
+    text-decoration: none;
+    line-height: 75px;
+    color: black;
+}
+
+#brukerNav li:hover {
+    background-color: lightgray;
+}
+
+#brukerNav_knapp {
+    position: absolute;
+    height: 50px;
+    width: 200px;
+    color: white;
+    cursor: pointer;
+    transition: 200ms;
+    background-color: #333;
+}
+
+#brukerNav_knapp:hover {
+    background-color: black;
+    transform: scale(1.1);
+}
+
+#brukerNav_knapp span {
+    font-size: 20px;
+    line-height: 50px;
+}
+
+
+/* Tabs */
+
+#kategorier {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#kategorier ul {
+    display: flex;
+    flex-wrap: nowrap;
+    list-style: none;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+#kategorier li {
+    display: block;
+    text-align: center;
+    transition: 200ms;
+    font-size: 20px;
+    line-height: 60px;
+    width: 100%;
+    background-color: lightgray;
+    cursor: pointer;
+    padding: 20px 0;
+}
+
+#kategorier li:hover {
+    background-color: white;
+    box-shadow: 1px 1px 5px 1px rgba(219,219,219,1);
+
+}
+
+#handlevognLink {
+    background-color: #4CAF50 !important;
+    color: white;
+}
+
+#handlevognLink:hover {
+    background-color: #46a049 !important;
+}
+
+.kategoriInnhold {
+    display: none;
+    max-width: 900px;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+#kategorier .aktiv {
+    background-color: white;
+    font-size: 25px;
+    box-shadow: 1px 1px 5px 1px rgba(219,219,219,1);
+}
+
+.rett {
+    width: 260px;
+    margin: 20px 20px;
+    background-color: white;
+    padding: 0;
+    box-shadow: 1px 1px 5px 1px rgba(219,219,219,1);
+}
+
+.rett img {
+    width: 100%;
+    height: 170px;
+}
+
+.rett h2 {
+    margin: 10px;
+    text-align: center;
+}
+
+.rettnavn {
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.pris {
+    font-size: 30px;
+}
+
+.rett form lable {
+    font-size: 20px;
+    line-height: 50px;
+    padding-left: 30px;
+}
+
+.rett form input {
+    font-size: 20px;
+    line-height: 50px;
+    padding: 0 10px;
+    width: 50%;
+    text-align: center;
+    margin: 0;
+    border: none;
+    float: right;
+    border: 1px solid black;
+    border-bottom: none;
+}
+
+.rett form button {
+    width: 100%;
+    margin: 0;
+    border: none;
+    color: white;
+    background-color: #4CAF50;
+    font-size: 20px;
+    line-height: 50px;
+}
+
+.rett form button:hover {
+    background-color: #46a049;
+}
+
+
+/* handlevogn */
+
+#hxandlevogn {
+    max-width: 900px;
+    padding: 10px;
+    margin: 50px auto;
+    box-shadow: 1px 2px 5px 1px rgba(219,219,219,1);
+}
+
+table {
+    margin: auto;
+    font-size: 15px;
+    line-height: 60px;
+    border-collapse: collapse;
+}
+
+th {
+    text-align: left;
+    font-size: 20px;
+}
+
+td {
+    border-top: 2px solid grey;
+}
+
+.slett {
+    width: 60px;
+    border-color: white;
+}
+
+.slett form {
+    border: none;
+    text-align: center;
+    height: 60px;
+}
+
+.slett form button {
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-size: 50px;
+    text-align: center;
+    line-height: 60px;
+    color: red;
+    background-color: rgba(0,0,0,0);
+    cursor: pointer;
+    width: 60px;
+    transition: 200ms;
+}
+
+.slett form button:hover {
+    transform: scale(1.3);
+}
+
+.tabellTotal {
+    width: 150px;
+}
+
+.sum {
+    line-height: 75px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.tabellPris {
+    width: 150px;
+}
+
+.tabellAntall {
+    width: 150px;
+}
+
+.tabellRettnavn {
+    width: 250px;
+}
+
+#handlevognKnapper {
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+}
+
+#handlevognKnapper a, #bestill button {
+    display: block;
+    width: 100%;
+    margin: auto;
+    font-size: 20px;
+    line-height: 50px;
+    background-color: lightgray;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+    transition: 200ms;
+}
+
+#handlevognKnapper a:hover, #bestill button:hover {
+    transform: scale(1.1);
+}
+
+#handle, #bestill {
+    max-width: 600px;
+    margin: auto;
+}
+
+#bestill button {
+    background-color: #4CAF50;
+    color: white;
+    margin: 0 auto;
+}
+
+#bruker {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+}
+
+#bruker p {
+    line-height: 50px;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+#bruker a {
+    max-width: 290px;
+}
+
+
+/* kontakt */
+
+#kontakt {
+    width: 1000px;
+    margin: 50px auto;
+    padding: 50px;
+    box-shadow: 1px 2px 5px 1px rgba(219,219,219,1);
+}
+
+#kontakt p {
+    font-size: 20px;
+    padding: 20px;
+}
+
+
+/* min side */
+
+.bestilling {
+    max-width: 900px;
+    box-shadow: 1px 2px 5px 1px rgba(219,219,219,1);
+    padding: 20px;
+    margin: 20px auto;
+}
+
+h1 {
+    text-align: center;
+    line-height: 100px;
+}
+
+h2 {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* logg inn og registrer */
+
+#login, #registrer {
+    margin: 50px auto;
+    width: 400px;
+}
+
+input[type="text"],
+input[type="password"] {
+    font-size: 20px;
+    line-height: 50px;
+    padding: 0 20px;
+    width: 400px;
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+    transition: 200ms;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    line-height: 60px;
+    padding-left: 40px;
+}
+
+#login button,
+#registrer button {
+    font-size: 20px;
+    line-height: 60px;
+    width: 400px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    transition: 200ms;
+}
+
+#login button:hover,
+#login button:focus,
+#registrer button:hover,
+#registrer button:focus {
+    transform: scale(1.1);
+}
+
+#error {
+    background-color: red;
+    color: white;
+    font-size: 20px;
+    line-height: 60px;
+    padding-left: 20px;
+}
+
+
+/* footer */
+
+footer {
+    position: absolute;
+    height: 50px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    line-height: 50px;
+    text-align: center;
+}
+
+
+/* hjem */
+
+#hjem {
+    max-width: 1000px;
+    width: 100%;
+    margin: auto;
+}
+
+#hjem h1 {
+    font-size: 100px;
+    font-weight: 900;
+    text-align: center;
+    padding: 50px 50px 70px 50px;
+}
+
+#hjem p {
+    max-width: 650px;
+    padding: 120px 80px 120px 0;
+    font-size: 20px;
+    line-height: 35px;
+    float: left;
+}
+
+#hjem img {
+    max-width: 350px;
+    width: 100%;
+}
+
+
+/* Slideshow */
+
+#slideshow {
+
+}
+
+.slide {
+    display: none;
+    width: 100%;
+    height: 100vh;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#slide1 {
+    display: block;
+}
+
+.slideLink {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 300px;
+    margin: 80vh auto 0 auto;
+    padding: 15px;
+    border: 3px solid white;
+    text-align: center;
+    font-size: 35px;
+    color: white;
+    text-decoration: none;
+    transition: 100ms;
+}
+
+.slideLink:hover {
+    background-color: white;
+    color: black;
+}
+
+
+/* meldingsboks */
+
+.brukerMelding {
+    display: none;
+    position: fixed;
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 30px;
+    width: 600px;
+    z-index: 100;
+    top: 60%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+
+
+/* boks */
+
+.boks {
+    max-width: 1000px;
+    width: 100%;
+    margin: 20px auto 50px auto;
+    padding: 25px 50px;
+    box-shadow: 1px 2px 5px 1px rgba(219,219,219,1);
+    background-color: white;
+}
+
+.boks h2 {
+    padding: 20px;
+}
+
+.boks p {
+    font-size: 20px;
+    padding: 20px;
+}
+
+@media screen and (max-width: 1400px) {
+
+    .mainHeader nav {
+        padding-right: 200px;
+    }
+
+}
