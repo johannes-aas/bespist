@@ -44,6 +44,7 @@
             <header class="mainHeader">
                 <nav>
                     <ul>
+                        <li><img src="bilder/hvit_logo.png"></img></li>
                         <a href='index.php'><li class="navHover">HJEM</li></a>
                         <a href="meny.php"><li class="navHover">MENY</li></a>
                         <a href="kontakt.php"><li class="navHover">KONTAKT</li></a>
@@ -65,7 +66,7 @@
                     <p><strong>Adresse:</strong> <?php echo $rad['adresse'] ?></p>
                 </div>
                 <?php
-                    $sql = "SELECT ordrenummer, ordretidspunkt, brukerid FROM ordre WHERE brukerid='$brukerid'";
+                    $sql = "SELECT ordrenummer, DATE_FORMAT(ordretidspunkt,'%d.%m.%Y') AS 'dato', DATE_FORMAT(ordretidspunkt,'%H:%i') AS 'tid', brukerid FROM ordre WHERE brukerid='$brukerid'";
                     $datasett = $tilkobling->query($sql);
 
                     if (mysqli_num_rows($datasett) == 0) {
@@ -75,7 +76,8 @@
                         while($rad = mysqli_fetch_array($datasett)) {
                 ?>
                             <div class="boks">
-                                <h2><?php echo $rad['ordretidspunkt']; ?></h2>
+                                <h2><strong>Dato: </strong><?php echo $rad['dato']; ?><br>
+                                <strong>Kl: </strong><?php echo $rad['tid']; ?></h2>
                                 <table>
                                     <tr>
                                         <th>Rett</th>
@@ -135,9 +137,15 @@
                 if($(window).scrollTop() > 10) {
                     $('.mainHeader').css('background-color', '#333');
                     $('.mainHeader nav a').css('padding', '0');
+                    $('.mainHeader img').css('clip', 'rect(0px, 186px, 54px, 0px)');
+                    $('.mainHeader img').css('padding', '0 10px');
+                    $('#brukerNav ul').slideUp();
                 } else {
                     $('.mainHeader').css('background-color', 'rgba(0, 0, 0, 0.5)');
                     $('.mainHeader nav a').css('padding', '75px 0 70px 0');
+                    $('.mainHeader img').css('clip', 'rect(0px, 186px, 195px, 0px)');
+                    $('.mainHeader img').css('padding', '10px');
+                    $('#brukerNav ul').slideDown();
                 }
             });
         </script>

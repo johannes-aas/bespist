@@ -34,6 +34,7 @@
             <header class="mainHeader">
                 <nav>
                     <ul>
+                        <li><img src="bilder/hvit_logo.png"></img></li>
                         <a href="index.php"><li class="navHover">HJEM</li></a>
                         <a href="meny.php"><li class="navHover">MENY</li></a>
                         <a><li id="aktiv">KONTAKT</li></a>
@@ -45,8 +46,14 @@
             <main>
                 <h2 style="padding-top: 50px;">Ta gjerne kontakt om det er noe du lurer på?</h2>
                 <div class="boks">
-                    <p><strong>E-post:</strong> eksempel@epost</p>
-                    <p><strong>Telefon:</strong> + 47 000 00 000</p>
+                    <div style="width:500px;float:left;">
+                        <p><strong>E-post:</strong> eksempel@epost</p>
+                        <p><strong>Telefon:</strong> + 47 ___ __ ___</p>
+                    </div>
+                    <div style="width:200px;float:right;">
+                        <img  width="200px" src="bilder/svart_logo.png"></img>
+                    </div>
+                    <br style="clear: both;">
                 </div>
             </main>
             <footer>
@@ -66,9 +73,13 @@
                 if($(window).scrollTop() > 10) {
                     $('.mainHeader').css('background-color', '#333');
                     $('.mainHeader nav a').css('padding', '0');
+                    $('.mainHeader img').css('clip', 'rect(0px, 186px, 54px, 0px)');
+                    $('.mainHeader img').css('padding', '0 10px');
                 } else {
                     $('.mainHeader').css('background-color', 'rgba(0, 0, 0, 0.5)');
                     $('.mainHeader nav a').css('padding', '75px 0 70px 0');
+                    $('.mainHeader img').css('clip', 'rect(0px, 186px, 195px, 0px)');
+                    $('.mainHeader img').css('padding', '10px');
                 }
             });
         </script>

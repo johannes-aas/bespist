@@ -4,9 +4,8 @@
     $tilkobling = mysqli_connect("localhost","root","","bespist");
 
     $brukerid = $_SESSION['brukerid'];
-    $tid = $_POST['tid'];
 
-    $sql = "INSERT INTO ordre (ordretidspunkt, brukerid) VALUES ('$tid', '$brukerid')";
+    $sql = "INSERT INTO ordre (ordretidspunkt, brukerid) VALUES (NOW(), '$brukerid')";
     $datasett = $tilkobling->query($sql);
 
     foreach ($_SESSION['handlevogn'] as $rettid => $antall) {

@@ -13,12 +13,14 @@
 
         $rettid = $_POST['rettid'];
         $antall = $_POST['antall'];
+        $kategori = $_POST['kategori'];
 
         $_SESSION['handlevogn'][$rettid] = $antall;
 
-        $get_handlevogn_status = "?handlevogn=oppdatert";
+        $get_handlevogn_status = "&handlevogn=oppdatert";
+        $get_kategori_status = "?kategori=$kategori";
 
-        header("Location: " . $_SERVER['REQUEST_URI'].$get_handlevogn_status);
+        header("Location: " . $_SERVER['REQUEST_URI'].$get_kategori_status.$get_handlevogn_status);
         exit();
     }
 
@@ -57,6 +59,7 @@
             <header class="mainHeader">
                 <nav>
                     <ul>
+                        <li><img src="bilder/hvit_logo.png"></img></li>
                         <a href="index.php"><li class="navHover">HJEM</li></a>
                         <a><li id="aktiv">MENY</li></a>
                         <a href="kontakt.php"><li class="navHover">KONTAKT</li></a>
@@ -77,78 +80,80 @@
                         }
                     }
                 ?>
-                <nav id="kategorier">
-                    <ul>
-                        <li tab="forretter">Foretter</li>
-                        <li tab="hovedretter">Hovedretter</li>
-                        <li tab="desserter">Desserter</li>
-                        <li id="handlevognLink" onclick="window.location.href='handlevogn.php'">
-                            <span>Gå til handlevogn</span>
-                            <svg width="20" height="20">
-                                <polygon points="5,0 20,10 5,20" fill="white" />
-                            </svg>
-                        </li>
-                    </ul>
-                </nav>
-                <div id="brukerTips" style="padding:50px;text-align:center;font-size:20px;">
-                    <p>Velg en kategori over</p>
-                </div>
-                <div class="kategoriInnhold" id="forretter">
+
+                <div class="kategoriInnhold">
                     <?php
-                        $sql = "SELECT rettid, rettnavn, pris, bildefil FROM rett WHERE kategoriid='1'";
-                        $datasett = $tilkobling->query($sql);
+                        if (isset($_GET['kategori'])) {
 
-                        while($rad = mysqli_fetch_array($datasett)) { ?>
-                            <div class="rett">
-                                <img src="bilder/<?php echo $rad['bildefil']; ?>" height="165px"></img>
-                                <h2 class="rettnavn"><?php echo $rad['rettnavn']; ?></h2>
-                                <h2 class="pris"><?php echo $rad['pris']; ?>,-</h2>
-                                <form action="meny.php" method="post">
-                                    <lable>Antall:</lable>
-                                    <input type="number" min="1" max="1000" name="antall" value="1">
-                                    <input hidden type="number" name="rettid" value="<?php echo $rad['rettid']; ?>">
-                                    <button name="legg_i_handlevogn" type="submit" value="Submit">Legg i handlevogn</button>
-                                </form>
-                            </div>
-                    <?php } ?>
-                </div>
-                <div class="kategoriInnhold" id="hovedretter">
+                            $forrett = $hovedrett = $dessert = "";
+
+                            if ($_GET['kategori'] == "forrett") {
+                                $kategori_id = '1';
+                                $kategori_navn = 'forrett';
+                                $forrett = 'aktiv';
+                            }
+                            if ($_GET['kategori'] == "hovedrett") {
+                                $kategori_id = '2';
+                                $kategori_navn = 'hovedrett';
+                                $hovedrett = 'aktiv';
+                            }
+                            if ($_GET['kategori'] == "dessert") {
+                                $kategori_id = '3';
+                                $kategori_navn = 'dessert';
+                                $dessert = 'aktiv';
+                            } ?>
+                            <nav id="kategorier">
+                                <ul>
+                                    <a class="<?php echo $forrett; ?>" href="meny.php?kategori=forrett"><li>Foretter</li></a>
+                                    <a class="<?php echo $hovedrett; ?>" href="meny.php?kategori=hovedrett"><li>Hovedretter</li></a>
+                                    <a class="<?php echo $dessert; ?>" href="meny.php?kategori=dessert"><li>Desserter</li></a>
+                                    <a href="handlevogn.php" id="handlevognLink">
+                                        <li>
+                                            <span>Gå til handlevogn</span>
+                                            <svg width="20" height="20">
+                                                <polygon points="5,0 20,10 5,20" fill="white" />
+                                            </svg>
+                                        </li>
+                                    </a>
+                                </ul>
+                            </nav>
                     <?php
-                        $sql = "SELECT rettid, rettnavn, pris, bildefil FROM rett WHERE kategoriid='2'";
-                        $datasett = $tilkobling->query($sql);
+                            $sql = "SELECT rettid, rettnavn, pris, bildefil FROM rett WHERE kategoriid=$kategori_id";
+                            $datasett = $tilkobling->query($sql);
 
-                        while($rad = mysqli_fetch_array($datasett)) { ?>
-                            <div class="rett">
-                                <img src="bilder/<?php echo $rad['bildefil']; ?>" height="165px"></img>
-                                <h2 class="rettnavn"><?php echo $rad['rettnavn']; ?></h2>
-                                <h2 class="pris"><?php echo $rad['pris']; ?>,-</h2>
-
-                                <form action="meny.php" method="post">
-                                    <lable>Antall:</lable>
-                                    <input type="number" min="1" max="1000" name="antall" value="1">
-                                    <input hidden type="number" name="rettid" value="<?php echo $rad['rettid']; ?>">
-                                    <button name="legg_i_handlevogn" type="submit" value="Submit">Legg i handlevogn</button>
-                                </form>
-                            </div>
-                    <?php } ?>
-                </div>
-                <div class="kategoriInnhold" id="desserter">
+                            while($rad = mysqli_fetch_array($datasett)) { ?>
+                                <div class="rett">
+                                    <img src="bilder/<?php echo $rad['bildefil']; ?>" height="165px"></img>
+                                    <h2 class="rettnavn"><?php echo $rad['rettnavn']; ?></h2>
+                                    <h2 class="pris"><?php echo $rad['pris']; ?>,-</h2>
+                                    <form action="meny.php" method="post">
+                                        <lable>Antall:</lable>
+                                        <input type="number" min="1" max="1000" name="antall" value="1">
+                                        <input hidden type="number" name="rettid" value="<?php echo $rad['rettid']; ?>">
+                                        <input hidden type="text" name="kategori" value="<?php echo $kategori_navn; ?>">
+                                        <button name="legg_i_handlevogn" type="submit" value="Submit">Legg i handlevogn</button>
+                                    </form>
+                                </div>
                     <?php
-                        $sql = "SELECT rettid, rettnavn, pris, bildefil FROM rett WHERE kategoriid='3'";
-                        $datasett = $tilkobling->query($sql);
-
-                        while($rad = mysqli_fetch_array($datasett)) { ?>
-                            <div class="rett">
-                                <img src="bilder/<?php echo $rad['bildefil']; ?>" height="165px"></img>
-                                <h2 class="rettnavn"><?php echo $rad['rettnavn']; ?></h2>
-                                <h2 class="pris"><?php echo $rad['pris']; ?>,-</h2>
-
-                                <form action="meny.php" method="post">
-                                    <lable>Antall:</lable>
-                                    <input type="number" min="1" max="1000" name="antall" value="1" size="2">
-                                    <input type="number" hidden name="rettid" value="<?php echo $rad['rettid']; ?>">
-                                    <button name="legg_i_handlevogn" type="submit" value="Submit">Legg i handlevogn</button>
-                                </form>
+                            }
+                        } else { ?>
+                            <nav id="kategorier">
+                                <ul>
+                                    <a href="meny.php?kategori=forrett"><li>Foretter</li></a>
+                                    <a href="meny.php?kategori=hovedrett"><li>Hovedretter</li></a>
+                                    <a href="meny.php?kategori=dessert"><li>Desserter</li></a>
+                                    <a href="handlevogn.php" id="handlevognLink">
+                                        <li>
+                                            <span>Gå til handlevogn</span>
+                                            <svg width="20" height="20">
+                                                <polygon points="5,0 20,10 5,20" fill="white" />
+                                            </svg>
+                                        </li>
+                                    </a>
+                                </ul>
+                            </nav>
+                            <div id="brukerTips" style="margin:auto;padding:50px;text-align:center;font-size:20px;">
+                                <p>Velg en kategori over</p>
                             </div>
                     <?php } ?>
                 </div>
@@ -168,9 +173,15 @@
                 if($(window).scrollTop() > 10) {
                     $('.mainHeader').css('background-color', '#333');
                     $('.mainHeader nav a').css('padding', '0');
+                    $('.mainHeader img').css('clip', 'rect(0px, 186px, 54px, 0px)');
+                    $('.mainHeader img').css('padding', '0 10px');
+                    $('#brukerNav ul').slideUp(300);
                 } else {
                     $('.mainHeader').css('background-color', 'rgba(0, 0, 0, 0.5)');
                     $('.mainHeader nav a').css('padding', '75px 0 70px 0');
+                    $('.mainHeader img').css('clip', 'rect(0px, 186px, 195px, 0px)');
+                    $('.mainHeader img').css('padding', '10px');
+                    $('#brukerNav ul').slideDown(700);
                 }
             });
 
@@ -180,18 +191,6 @@
 
             $('#brukerNav_knapp').click(function() {
                 brukerNav_Toggle();
-            });
-
-            $('#kategorier ul li').click(function() {
-                var tab_id = $(this).attr('tab');
-
-                $('#brukerTips').hide();
-                $('#kategorier ul li').removeClass('aktiv');
-                $('.kategoriInnhold').hide();
-                $('#kategorier ul li').css('padding', '0');
-
-                $(this).addClass('aktiv');
-                $('#' + tab_id).css('display', 'flex');
             });
         </script>
     </body>

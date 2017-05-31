@@ -59,6 +59,7 @@
             <header class="mainHeader">
                 <nav>
                     <ul>
+                        <li><img src="bilder/hvit_logo.png"></img></li>
                         <a href="index.php"><li class="navHover">HJEM</li></a>
                         <a href="meny.php"><li class="navHover">MENY</li></a>
                         <a href="kontakt.php"><li class="navHover">KONTAKT</li></a>
@@ -90,6 +91,21 @@
                 brukerNav_Toggle();
             });
 
+            $(window).scroll(function() {
+                if($(window).scrollTop() > 10) {
+                    $('.mainHeader').css('background-color', '#333');
+                    $('.mainHeader nav a').css('padding', '0');
+                    $('.mainHeader img').css('clip', 'rect(0px, 186px, 54px, 0px)');
+                    $('.mainHeader img').css('padding', '0 10px');
+                    $('#brukerNav ul').slideUp();
+                } else {
+                    $('.mainHeader').css('background-color', 'rgba(0, 0, 0, 0.5)');
+                    $('.mainHeader nav a').css('padding', '75px 0 70px 0');
+                    $('.mainHeader img').css('clip', 'rect(0px, 186px, 195px, 0px)');
+                    $('.mainHeader img').css('padding', '10px');
+                    $('#brukerNav ul').slideDown();
+                }
+            });
         </script>
     </body>
 </html>
